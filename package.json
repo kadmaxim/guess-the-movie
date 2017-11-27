@@ -1,0 +1,15 @@
+{
+  "name": "guess-the-movie",
+  "version": "0.1.0",
+  "description": "Project \"Guess the movie\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
+  "contributors": [
+    "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
+    "Maksym Savysko <maksym.savysko@hs-augsburg.de>"
+  ],
+  "license": "ISC"
+}
