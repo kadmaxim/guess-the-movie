@@ -11,5 +11,8 @@
     "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
     "Maksym Savysko <maksym.savysko@hs-augsburg.de>"
   ],
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
