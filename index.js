@@ -1,12 +1,33 @@
 let express = require('express');
-let app = express();
+let bodyParser = require('body-parser');
+let url = require('url');
+let db = require('./app/db-client');
 
 const PORT = 3000;
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+let app = express();
+
+app.set('port', PORT);
+
+function getResponse() {
+    return { "status" : "fail" };
+}
+
+app.get('/api/users/:name', function (req, res) {
+    let username = req.params.name;
+    let qResponse = getResponse();
+    let connection = db.connect();
+    let whereParams = [username];
+
+    connection.query('SELECT score FROM users WHERE name = ?', whereParams, function (err, score) {
+        if (err) throw err;
+
+        connection.end();
+
+        res.end("Connected with DB");
+    });
 });
 
-app.listen(PORT, function () {
-    console.log(`App listening on port ${PORT}!`);
+app.listen(app.get('port'), function () {
+    console.log("Server is running on port " + app.get('port'));
 });
