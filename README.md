@@ -1,7 +1,11 @@
 # Guess the movie
 
-Project description will appear here soon.
+Test your visual memory with a exciting game "Guess the movie".
 
+Guess as many movies as possible, using only stills from them. <br/>
+The game involves thousands of movies and tens of thousands of stills.<br/>
+Who guesses more movies – will be the winner!<br/>
+Good luck and success in the game!
 
 ## How to start to work on app
 1. $ `git clone <repo>`
