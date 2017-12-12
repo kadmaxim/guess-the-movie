@@ -1,5 +1,4 @@
-const DB = require('./../config/db-client');
-const Response = require('./response');
+const DB = require('./../../config/db-client');
 
 function check(err, conn){
     if (err) throw err;
@@ -10,86 +9,58 @@ function check(err, conn){
 module.exports = {
     add : function (req, res) {
         let film = req.body;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('INSERT INTO movies SET ?', film, function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.insertId === 0) {
-                resp.msg = `Film ${film.title} was not added!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `Film ${film.title} was added!`
-                };
+            if (results.insertId !== 0) {
+                res.status(201).end(`Film ${film.title} was added!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
     del : function (req, res) {
         let filmID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('DELETE FROM movies WHERE id = ?', filmID, function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.affectedRows === 0) {
-                resp.msg = `Film with ID = ${filmID} was not deleted!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `Film with ID = ${filmID} was deleted!`
-                };
+            if (results.affectedRows != 0) {
+                res.status(200).end(`Film with ID = ${filmID} was deleted!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
     update : function (req, res) {
         let filmID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('UPDATE movies SET title = ?, img = ? WHERE id = ?', [ "title", "img", filmID ], function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.affectedRows === 0) {
-                resp.msg = `Film with ID = ${filmID} was not updated!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `Film with ID = ${filmID} was updated!`
-                };
+            if (results.affectedRows != 0) {
+                res.status(200).end(`Film with ID = ${filmID} was updated!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
     get : function (req, res) {
         let filmID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('SELECT * FROM movies WHERE id = ?', filmID, function (errs, films) {
-            check(errs, connection);
+            connection.end();
 
-            if (films.length === 0) {
-                resp.msg = `Film with ID = ${filmID} not found!`;
-                console.log(resp.msg);
+            if (films.length !== 0) {
+                res.status(200).json(films[0]);
             } else {
-                resp = {
-                    "status" : "ok",
-                    "film" : films[0]
-                };
+                next(errs);
             }
-
-            res.json(resp);
         });
     }
 };

@@ -1,5 +1,4 @@
-const DB = require('./../config/db-client');
-const Response = require('./response');
+const DB = require('./../../config/db-client');
 
 function check(err, conn){
     if (err) throw err;
@@ -8,88 +7,60 @@ function check(err, conn){
 }
 
 module.exports = {
-    add : function (req, res) {
+    add : function (req, res, next) {
         let user = req.body;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('INSERT INTO users SET ?', user, function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.insertId === 0) {
-                resp.msg = `User ${user.login} was not added!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `User ${user.login} was added!`
-                };
+            if (results.insertId !== 0) {
+                res.status(201).end(`User ${user.login} was added!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
-    del : function (req, res) {
+    del : function (req, res, next) {
         let userID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('DELETE FROM users WHERE id = ?', userID, function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.affectedRows === 0) {
-                resp.msg = `User with ID = ${userID} was not deleted!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `User with ID = ${userID} was deleted!`
-                };
+            if (results.affectedRows != 0) {
+                res.status(200).end(`User with ID = ${userID} was deleted!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
-    update : function (req, res) {
+    update : function (req, res, next) {
         let userID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
         connection.query('UPDATE users SET login = ?, password = ? WHERE id = ?', [ "login", "title", userID ], function (errs, results) {
-            check(errs, connection);
+            connection.end();
 
-            if (results.affectedRows === 0) {
-                resp.msg = `User with ID = ${userID} was not updated!`;
-                console.log(resp.msg);
-            } else {
-                resp = {
-                    "status" : "ok",
-                    "msg" : `User with ID = ${userID} was updated!`
-                };
+            if (results.affectedRows != 0) {
+                res.status(200).end(`User with ID = ${userID} was updated!`);
+            }else {
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
-    get : function (req, res) {
+    get : function (req, res, next) {
         let userID = req.params.id;
-        let resp = Response.init;
         let connection = DB.connect();
 
-        connection.query('SELECT * FROM users WHERE id = ?', userID, function (errs, benutzer) {
-            check(errs, connection);
+        connection.query('SELECT * FROM users WHERE id = ?', userID, function (errs, users) {
+            connection.end();
 
-            if (benutzer.length === 0) {
-                resp.msg = `User with ID = ${userID} not found!`;
-                console.log(resp.msg);
+            if (users.length !== 0) {
+                res.status(200).json(users[0]);
             } else {
-                resp = {
-                    "status" : "ok",
-                    "user" : benutzer[0]
-                };
+                next(errs);
             }
-
-            res.json(resp);
         });
     },
     findById : function (id) {
