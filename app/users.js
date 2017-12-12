@@ -7,8 +7,6 @@ function check(err, conn){
     conn.end();
 }
 
-//https://www.npmjs.com/package/mysql
-
 module.exports = {
     add : function (req, res) {
         let user = req.body;
@@ -92,6 +90,36 @@ module.exports = {
             }
 
             res.json(resp);
+        });
+    },
+    findById : function (id) {
+        let connection = DB.connect();
+
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM users WHERE id = ?', id, function (errs, users) {
+                check(errs, connection);
+
+                if (users.length > 0) {
+                    resolve(users[0]);
+                }else {
+                    reject(new Error("User not found"));
+                }
+            });
+        });
+    },
+    findByName : function (username) {
+        let connection = DB.connect();
+
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM users WHERE login like ?', username, function (errs, users) {
+                check(errs, connection);
+
+                if (users.length > 0) {
+                    resolve(users[0]);
+                }else {
+                    reject(new Error("User not found"));
+                }
+            });
         });
     }
 };
