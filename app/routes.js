@@ -3,7 +3,6 @@ const Users = require('./models/users');
 
 module.exports = function (app, passport) {
     app.put('/api/film', Films.add);
-	app.get('/api/film', Films.getall);
     app.get('/api/film/:id', Films.get);
     app.post('/api/film/:id', Films.update);
     app.delete('/api/film/:id', Films.del);
@@ -13,6 +12,8 @@ module.exports = function (app, passport) {
     app.post('/api/user/:id', Users.update);
     app.delete('/api/user/:id', Users.del);
     
+	app.get('/api/film', Films.getall);
+	
     app.get('/', function (req, res) {
         res.render('home', { user : req.user });
     });
