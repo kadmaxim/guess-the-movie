@@ -12,6 +12,8 @@ module.exports = function (app, passport) {
     app.post('/api/user/:id', Users.update);
     app.delete('/api/user/:id', Users.del);
     
+	app.get('/api/film', Films.getall);
+	
     app.get('/', function (req, res) {
         res.render('home', { user : req.user });
     });

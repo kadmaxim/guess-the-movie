@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(express.static('views'));
 app.set('port', PORT);
 app.use(session({
     secret : 'guess-the-movie',
@@ -26,6 +27,7 @@ app.set('view engine', 'ejs');
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./config/passport')(passport); // pass passport for configuration
 require('./app/routes')(app, passport);
 

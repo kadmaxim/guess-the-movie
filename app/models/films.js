@@ -62,5 +62,18 @@ module.exports = {
                 next(errs);
             }
         });
+    },
+	getall : function (req, res) {
+        let connection = DB.connect();
+
+        connection.query('SELECT * FROM movies', function (errs, films) {
+            connection.end();
+
+            if (films.length !== 0) {
+                res.status(200).json(films);
+            } else {
+                next(errs);
+            }
+        });
     }
 };
