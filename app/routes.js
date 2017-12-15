@@ -3,6 +3,7 @@ const Users = require('./models/users');
 
 module.exports = function (app, passport) {
     app.put('/api/film', Films.add);
+	app.get('/api/film', Films.getall);
     app.get('/api/film/:id', Films.get);
     app.post('/api/film/:id', Films.update);
     app.delete('/api/film/:id', Films.del);

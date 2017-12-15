@@ -27,6 +27,8 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static('views'));
+
 require('./config/passport')(passport); // pass passport for configuration
 require('./app/routes')(app, passport);
 

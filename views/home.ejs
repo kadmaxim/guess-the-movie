@@ -1,5 +1,25 @@
-<% if (!user) { %>
-<p>Welcome! Please <a href="/login">log in</a>.</p>
-<% } else { %>
-<p>Hello, <%= user.login %>. View your <a href="/profile">profile</a>.</p>
-<% } %>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Account creating</title>
+  
+  <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper">
+	<form class="form-signin">	
+	  <% if (!user) { %>      
+      <h2 class="form-signin-heading">Welcome!</h2>
+	  <a class="btn btn-lg btn-primary btn-block" href="/login">Log in</a>
+      <% } else { %>
+	  <h2 class="form-signin-heading">Hello, <%= user.login %><br/>View your <a href="/profile">profile</h2>
+	  <% } %>
+	  </form>
+  </div> 
+</body>
+</html>
