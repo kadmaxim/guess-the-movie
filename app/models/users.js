@@ -68,12 +68,14 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM users WHERE id = ?', id, function (errs, users) {
-                check(errs, connection);
+                if(errs) reject(errs);
+
+                connection.end();
 
                 if (users.length > 0) {
                     resolve(users[0]);
                 }else {
-                    reject(new Error("User not found"));
+                    resolve(null);
                 }
             });
         });
@@ -83,12 +85,14 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM users WHERE login like ?', username, function (errs, users) {
-                check(errs, connection);
+                if(errs) reject(errs);
+
+                connection.end();
 
                 if (users.length > 0) {
                     resolve(users[0]);
                 }else {
-                    reject(new Error("User not found"));
+                    resolve(null);
                 }
             });
         });
