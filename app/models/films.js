@@ -63,7 +63,7 @@ module.exports = {
             }
         });
     },
-	getall : function (req, res) {
+	getAll : function (req, res) {
         let connection = DB.connect();
 
         connection.query('SELECT * FROM movies', function (errs, films) {
