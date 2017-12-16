@@ -4,7 +4,7 @@ module.exports = {
     watch : true,
     entry : './public/js/app.js',
     output : {
-        path : path.resolve(__dirname, './dist'),
+        path : path.resolve(__dirname, './public/dist'),
         publicPath : './dist/',
         filename : 'build.js'
     },

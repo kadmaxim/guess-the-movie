@@ -195,7 +195,7 @@
                 var diff = _.difference(sampled, this.user.answers);
 
                 if (diff.length > 0) {
-                    this.buttons = _.shuffle(_.shuffle(sampled));
+                    this.buttons = _.shuffle(sampled);
                     this.question = _.sample(diff);
                     if (this.appMode == 1) {
                         var elemBar = document.querySelector('.controls-wrapp i.front-lasts');
