@@ -4,8 +4,9 @@
   "description": "Project \"Guess the movie\"",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "gulp watch",
+    "start": "concurrently --kill-others \"gulp watch\" \"webpack\"",
+    "gulp": "gulp watch",
+    "webpack":"webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
@@ -35,6 +36,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
+    "concurrently": "^3.5.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",

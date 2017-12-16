@@ -1,9 +1,10 @@
 var path = require('path');
 
 module.exports = {
+    watch : true,
     entry : './public/js/app.js',
     output : {
-        path : path.resolve(__dirname, './public/dist'),
+        path : path.resolve(__dirname, './dist'),
         publicPath : './dist/',
         filename : 'build.js'
     },
@@ -20,7 +21,7 @@ module.exports = {
                 test : /\.vue$/,
                 loader : 'vue-loader',
                 options : {
-                    postcss: [require('postcss-cssnext')()]
+                    postcss : [require('postcss-cssnext')()]
                 }
             },
             {
