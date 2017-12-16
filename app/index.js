@@ -29,7 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport); // pass passport for configuration
-require('./app/routes')(app, passport);
+require('./routes')(app, passport);
 
 app.listen(app.get('port'), function () {
     console.log(`Server is running on port ${app.get('port')}`);

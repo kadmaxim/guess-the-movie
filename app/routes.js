@@ -19,5 +19,5 @@ module.exports = function (app, passport) {
     app.get('/admin/login', Admin.login);
     app.post('/admin/login', passport.authenticate('local', { failureRedirect : '/admin/login' }), Admin.auth);
     app.get('/admin/profile', require('connect-ensure-login').ensureLoggedIn('/admin/login'), Admin.profile);
-    app.get('/logout', Admin.login);
+    app.get('/logout', Admin.logout);
 };
