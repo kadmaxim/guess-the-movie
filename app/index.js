@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(express.static('dist'));
 
 app.set('port', PORT);
 app.use(session({

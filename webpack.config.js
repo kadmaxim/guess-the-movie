@@ -4,8 +4,8 @@ module.exports = {
     watch : true,
     entry : './public/js/app.js',
     output : {
-        path : path.resolve(__dirname, './public/dist'),
-        publicPath : './dist/',
+        path : path.resolve(__dirname, './dist'),
+        publicPath : './',
         filename : 'build.js'
     },
     module : {
