@@ -4,6 +4,8 @@
   "description": "Project \"Guess the movie\"",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "watch": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
@@ -24,6 +26,23 @@
     "nodemon": "^1.10.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "vue": "^2.4.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "gulp": "^3.9.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.9",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0"
   }
 }
