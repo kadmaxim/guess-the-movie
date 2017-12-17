@@ -1,5 +1,6 @@
 const Films = require('./models/films');
 const Users = require('./models/users');
+const Admin = require('./models/admin');
 
 module.exports = function (app, passport) {
     app.put('/api/film', Films.add);
@@ -7,32 +8,16 @@ module.exports = function (app, passport) {
     app.post('/api/film/:id', Films.update);
     app.delete('/api/film/:id', Films.del);
 
+    app.get('/api/films', Films.getAll);
+
     app.put('/api/user', Users.add);
     app.get('/api/user/:id', Users.get);
     app.post('/api/user/:id', Users.update);
     app.delete('/api/user/:id', Users.del);
-    
-	app.get('/api/film', Films.getall);
 	
-    app.get('/', function (req, res) {
-        res.render('home', { user : req.user });
-    });
-
-    app.get('/login', function (req, res) {
-        res.render('login');
-    });
-
-    app.post('/login', passport.authenticate('local', { failureRedirect : '/login' }), function (req, res) {
-        console.log("logged in");
-        res.redirect('/');
-    });
-
-    app.get('/logout', function (req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-
-    app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), function (req, res) {
-        res.render('profile', { user : req.user });
-    });
+    app.get('/admin', Admin.home);
+    app.get('/admin/login', Admin.login);
+    app.post('/admin/login', passport.authenticate('local', { failureRedirect : '/admin/login' }), Admin.auth);
+    app.get('/admin/profile', require('connect-ensure-login').ensureLoggedIn('/admin/login'), Admin.profile);
+    app.get('/logout', Admin.logout);
 };

@@ -1,4 +1,4 @@
-const DB = require('./../../config/db-client');
+const DB = require('./../config/db-client');
 
 function check(err, conn){
     if (err) throw err;

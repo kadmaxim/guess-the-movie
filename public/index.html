@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the movie!</title>
+
+    <link rel="shortcut icon" href="./img/favicon.ico" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;subset=cyrillic" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Exo+2:600,700,800,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lobster&amp;subset=cyrillic" rel="stylesheet">
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        #main-wrap {
+            width: 858px;
+            height: 536px;
+            overflow: hidden;
+            box-shadow: 0 0 2px #cccccc;
+            border-radius: 2px;
+            margin: 2em auto;
+            padding: 0 1em 1em;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="film-app main-menu" id="main-wrap" v-cloak>
+    <component :is="currentView" :movies="films" :sound-mode="isPlaySound" :app-mode="gameMode"></component>
+</div>
+    <script src="http://underscorejs.ru/underscore.js"></script>
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script>
+    <script src="./js/fetch.js"></script>
+    <script src="./build.js"></script>
+</body>
+</html>

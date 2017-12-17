@@ -6,7 +6,7 @@
   
   <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
 
 </head>
 
@@ -15,9 +15,9 @@
 	<form class="form-signin">	
 	  <% if (!user) { %>      
       <h2 class="form-signin-heading">Welcome!</h2>
-	  <a class="btn btn-lg btn-primary btn-block" href="/login">Log in</a>
+	  <a class="btn btn-lg btn-primary btn-block" href="/admin/login">Log in</a>
       <% } else { %>
-	  <h2 class="form-signin-heading">Hello, <%= user.login %><br/>View your <a href="/profile">profile</h2>
+	  <h2 class="form-signin-heading">Hello, <%= user.login %><br/>View your <a href="/admin/profile">profile</h2>
 	  <% } %>
 	  </form>
   </div> 

@@ -7,9 +7,12 @@ The game involves thousands of movies and tens of thousands of stills.<br/>
 Who guesses more movies – will be the winner!<br/>
 Good luck and success in the game!
 
-## How to start to work on app
+## How to start
 1. $ `git clone <repo>`
-1. $ `cd guess-the-movie`
-2. $ `npm install`
-4. $ `gulp watch`
-5. Make changes to code.
+2. $ `cd guess-the-movie`
+3. $ `npm install`
+
+## Different modes
+1. $ `npm run gulp` - to work on express part
+2. $ `npm run webpack` - to make changes in Vue part
+3. $ `npm start` - to work concurrently in 2 previous modes

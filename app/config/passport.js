@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const md5 = require('md5');
 
-const Users = require('./../app/models/users');
+const Users = require('./../models/users');
 
 module.exports = function (passport) {
 
