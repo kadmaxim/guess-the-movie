@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently --kill-others \"gulp watch\" \"webpack\"",
     "gulp": "gulp watch",
-    "webpack":"webpack",
+    "webpack": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksym Kadatskyi <maksym.kadatskyi@hs-augsburg.de>",
@@ -24,6 +24,7 @@
     "express-session": "^1.15.6",
     "md5": "^2.2.1",
     "mysql": "^2.11.1",
+    "mysql-promise": "^4.1.0",
     "nodemon": "^1.10.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
