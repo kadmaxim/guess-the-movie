@@ -12,15 +12,9 @@ module.exports = {
         let connection = DB.connect();
 
         connection.query('INSERT INTO movies SET ?', film, function (errs, results) {
-            connection.end();
-
-            /* if (results.insertId !== 0) {
-                res.status(201).end(`Film ${film.title} was added!`);
-            }else {
-                next(errs);
-            } */
+	connection.end();
 			
-			res.redirect('/admin/admin');
+	res.redirect('/admin/admin');
         });
     },
     del : function (req, res) {
@@ -65,7 +59,7 @@ module.exports = {
             }
         });
     },
-	getAll : function (req, res) {
+    getAll : function (req, res) {
         let connection = DB.connect();
 
         connection.query('SELECT * FROM movies', function (errs, films) {
