@@ -17,6 +17,6 @@ module.exports = {
         res.render('profile', { user : req.user });
     },
 	addfilms : function (req, res) {
-    res.render('admin');
+		res.render('admin');
     }
 };
