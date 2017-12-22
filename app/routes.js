@@ -3,7 +3,7 @@ const Users = require('./models/users');
 const Admin = require('./models/admin');
 
 module.exports = function (app, passport) {
-    app.put('/api/film', Films.add);
+    app.post('/api/film', Films.add);
     app.get('/api/film/:id', Films.get);
     app.post('/api/film/:id', Films.update);
     app.delete('/api/film/:id', Films.del);
@@ -20,4 +20,5 @@ module.exports = function (app, passport) {
     app.post('/admin/login', passport.authenticate('local', { failureRedirect : '/admin/login' }), Admin.auth);
     app.get('/admin/profile', require('connect-ensure-login').ensureLoggedIn('/admin/login'), Admin.profile);
     app.get('/logout', Admin.logout);
+	app.get('/admin/admin', Admin.addfilms);
 };

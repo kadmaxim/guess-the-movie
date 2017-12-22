@@ -15,5 +15,8 @@ module.exports = {
     },
     profile : function (req, res) {
         res.render('profile', { user : req.user });
+    },
+	addfilms : function (req, res) {
+    res.render('admin');
     }
 };

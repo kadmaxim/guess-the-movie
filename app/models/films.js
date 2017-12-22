@@ -14,11 +14,13 @@ module.exports = {
         connection.query('INSERT INTO movies SET ?', film, function (errs, results) {
             connection.end();
 
-            if (results.insertId !== 0) {
+            /* if (results.insertId !== 0) {
                 res.status(201).end(`Film ${film.title} was added!`);
             }else {
                 next(errs);
-            }
+            } */
+			
+			res.redirect('/admin/admin');
         });
     },
     del : function (req, res) {
