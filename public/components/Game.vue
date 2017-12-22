@@ -86,7 +86,7 @@
             timeLeft : function () {
                 var timeLeft = this.sessionSeconds - this.seconds;
                 if (timeLeft === 3) {
-                    this.playSound('timer');
+                    this.$eventHub.$emit('play-sound', 'timer');
                 }
                 if (timeLeft === 0) {
                     this.user.lives = this.appMode === 2 ? 0 : this.user.lives;
@@ -111,7 +111,7 @@
                 this.user.lives = 3;
                 this.user.score = 0;
                 if (full) {
-                    this.playSound('loaded');
+                    this.$eventHub.$emit('play-sound', 'loaded');
                 }
                 if (this.appMode > 0) {
                     var elemBar = document.querySelector('.controls-wrapp i.front-lasts');
@@ -144,10 +144,10 @@
                 var lastIndex = this.user.answers.length - 1;
 
                 if (elem) {
-                    this.playSound('bleep');
+                    this.$eventHub.$emit('play-sound', 'bleep');
                     this.user.answers[lastIndex].status = true;
                 } else {
-                    this.playSound('fail');
+                    this.$eventHub.$emit('play-sound', 'fail');
                     this.user.answers[lastIndex].status = false;
                 }
 
@@ -184,11 +184,6 @@
                     setTimeout(this.skip, 750);
                 }
             },
-            playSound(fileName){
-                if (this.soundMode) {
-                    new Audio("./sounds/" + fileName + ".mp3").play();
-                }
-            },
             loadNext(){
                 var shuffled = _.shuffle(this.movies);
                 var sampled = _.sample(shuffled, 4);
@@ -196,6 +191,7 @@
 
                 if (diff.length > 0) {
                     this.buttons = _.shuffle(sampled);
+                    this.$forceUpdate();
                     this.question = _.sample(diff);
                     if (this.appMode == 1) {
                         var elemBar = document.querySelector('.controls-wrapp i.front-lasts');
@@ -218,10 +214,10 @@
                 var msgTitle = '';
                 this.exitToMenu();
                 if (wasted) {
-                    this.playSound('wasted');
+                    this.$eventHub.$emit('play-sound', 'wasted');
                     msgTitle = 'Game over :(';
                 } else {
-                    this.playSound('finish');
+                    this.$eventHub.$emit('play-sound', 'finish');
                     msgTitle = 'Congratulations!';
                 }
 
@@ -262,7 +258,7 @@
                     body : fd
                 };
 
-                fetch('http://localhost/api/user', params).then(console.log, console.log);
+                fetch('/api/user', params).then(console.log, console.log);
 
                 if (userName !== '') {
                     swal("Score saved!", "Thank you for playing, " + userName + "!", "success");
@@ -317,6 +313,7 @@
         width: 100%;
         position: absolute;
         height: 482px;
+        background: url('./../img/giphy.gif') no-repeat center;
     }
 
     .img-wrapp img {

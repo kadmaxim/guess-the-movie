@@ -6,6 +6,12 @@
     export default {
         name : 'sound-control',
         props : ['mode'],
+        created: function(){
+            this.$eventHub.$on('play-sound', this.playSound);
+        },
+        beforeDestroy: function () {
+            this.$eventHub.$off('play-sound', this.playSound);
+        },
         computed : {
             soundIconClass : function () {
                 if (this.mode) {
@@ -16,6 +22,11 @@
             }
         },
         methods: {
+            playSound(fileName){
+                if (this.mode) {
+                    new Audio("./sounds/" + fileName + ".mp3").play();
+                }
+            },
             changeSound() {
                 this.$eventHub.$emit('change-sound');
             }

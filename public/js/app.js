@@ -8,7 +8,7 @@ Vue.component('sound-control', Sound);
 const eventHub = new Vue();
 Vue.prototype.$eventHub = eventHub;
 
-const host = 'http://localhost:3000';
+const host = '';
 
 new Vue({
     el: '.film-app',
@@ -78,12 +78,7 @@ new Vue({
             this.isPlaySound = !this.isPlaySound;
         },
         loadAll: function(){
-            var params = { 
-                method: 'GET',
-                mode: 'cors'
-            };
-
-            fetch(`${host}/api/films`, params)
+            fetch(`${host}/api/films`)
                 .then((response) => response.json())
                 .then((movies) => this.films = movies);
         }
