@@ -1,100 +1,39 @@
 const DB = require('./../config/db-client');
-
-function check(err, conn){
-    if (err) throw err;
-
-    conn.end();
-}
+const md5 = require('md5');
 
 module.exports = {
     add : function (req, res, next) {
-        let user = req.body;
-        let connection = DB.connect();
+        let user = {};
+        user.password = req.body.pswd ? md5(req.body.pswd) : '';
+        user.login = req.body.log ? req.body.log : '';
 
-        connection.query('INSERT INTO users SET ?', user, function (errs, results) {
-            connection.end();
-
-            if (results.insertId !== 0) {
-                res.status(201).end(`User ${user.login} was added!`);
-            }else {
-                next(errs);
-            }
-        });
+        DB.query('INSERT INTO users SET ?', user).then(res.end("OK"), next);
     },
     del : function (req, res, next) {
         let userID = req.params.id;
-        let connection = DB.connect();
 
-        connection.query('DELETE FROM users WHERE id = ?', userID, function (errs, results) {
-            connection.end();
-
-            if (results.affectedRows != 0) {
-                res.status(200).end(`User with ID = ${userID} was deleted!`);
-            }else {
-                next(errs);
-            }
-        });
+        DB.query('DELETE FROM users WHERE id = ?', userID).then(res.end("OK"), next);
     },
     update : function (req, res, next) {
         let userID = req.params.id;
-        let connection = DB.connect();
+        let password = req.body.pswd ? md5(req.body.pswd) : '';
+        let login = req.body.log ? req.body.log : '';
 
-        connection.query('UPDATE users SET login = ?, password = ? WHERE id = ?', [ "login", "title", userID ], function (errs, results) {
-            connection.end();
-
-            if (results.affectedRows != 0) {
-                res.status(200).end(`User with ID = ${userID} was updated!`);
-            }else {
-                next(errs);
-            }
-        });
+        DB.query('UPDATE users SET login = ?, password = ? WHERE id = ?', [login, password, userID]).then(res.end("OK"), next);
     },
     get : function (req, res, next) {
         let userID = req.params.id;
-        let connection = DB.connect();
 
-        connection.query('SELECT * FROM users WHERE id = ?', userID, function (errs, users) {
-            connection.end();
-
-            if (users.length !== 0) {
-                res.status(200).json(users[0]);
-            } else {
-                next(errs);
-            }
-        });
+        DB.query('SELECT * FROM users WHERE id = ?', userID).spread(rows => rows[0]).then(user => res.json(user), next);
     },
     findById : function (id) {
-        let connection = DB.connect();
-
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM users WHERE id = ?', id, function (errs, users) {
-                if(errs) reject(errs);
-
-                connection.end();
-
-                if (users.length > 0) {
-                    resolve(users[0]);
-                }else {
-                    resolve(null);
-                }
-            });
+            DB.query('SELECT * FROM users WHERE id = ?', id).spread(rows => rows[0]).then(resolve, reject);
         });
     },
     findByName : function (username) {
-        let connection = DB.connect();
-
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM users WHERE login like ?', username, function (errs, users) {
-                if(errs) reject(errs);
-
-                connection.end();
-
-                if (users.length > 0) {
-                    resolve(users[0]);
-                }else {
-                    resolve(null);
-                }
-            });
+            DB.query('SELECT * FROM users WHERE login like ?', username).spread(rows => rows[0]).then(resolve, reject);
         });
     }
 };

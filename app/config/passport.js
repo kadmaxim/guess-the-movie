@@ -10,13 +10,13 @@ module.exports = function (passport) {
     });
 
     passport.deserializeUser(function (id, done) {
-        Users.findById(id).then(user => done(null, user), err => done(err));
+        Users.findById(id).then(user => done(null, user), done);
     });
 
     passport.use('local', new LocalStrategy(function (username, password, done) {
         Users.findByName(username)
             .then(user => {
-                if (user === null || user.password !== md5(password)) {
+                if (!user || user.password !== md5(password)) {
                     return done(null, false);
                 }
 
