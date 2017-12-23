@@ -1,6 +1,8 @@
 const Films = require('./models/films');
+const Gamers = require('./models/gamers');
 const Users = require('./models/users');
 const Admin = require('./models/admin');
+
 
 module.exports = function (app, passport) {
     app.post('/api/film', Films.add);
@@ -9,6 +11,9 @@ module.exports = function (app, passport) {
     app.delete('/api/film/:id', Films.del);
 
     app.get('/api/films', Films.getAll);
+    
+    app.post('/api/gamer', Gamers.add);	
+    app.get('/api/gamers', Gamers.getAll);
 
     app.put('/api/user', Users.add);
     app.get('/api/user/:id', Users.get);

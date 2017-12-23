@@ -16,7 +16,6 @@
 		<% if (!user) { %>      
         		<h2 class="form-signin-heading">Welcome!</h2>
 	  			<a class="btn btn-lg btn-primary btn-block" href="/admin/login">Log in</a>
-	  			<a class="btn btn-lg btn-primary btn-block" href="/admin/admin">Add films</a>
         	<% } else { %>
 			<h2 class="form-signin-heading">Hello, <%= user.login %><br/>View your <a href="/admin/profile">profile</h2>
 		<% } %>
