@@ -4,13 +4,15 @@ const url = require('url');
 const session = require('express-session');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
+app.use(multer().array());
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static('dist'));
@@ -29,7 +31,7 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport);
 require('./routes')(app, passport);
 
 app.listen(app.get('port'), function () {

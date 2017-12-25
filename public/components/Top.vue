@@ -16,11 +16,11 @@
                     <th>Score</th>
                     <th></th>
                 </tr>
-                <tr v-for="(user, index) in filteredUsers">
+                <tr v-for="(user, index) in filteredUsers" v-if="index < 10">
                     <td>{{ index + 1 }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.score }}</td>
-                    <td><img v-if="index < 7" :src="'/img/'+(index+1)+'.png'"></td>
+                    <td><img v-if="index < 6" :src="'/img/'+(index+1)+'.png'"></td>
                 </tr>
             </table>
 			<span v-if="topUsers.length !== 0 & filteredUsers.length === 0">
@@ -44,7 +44,7 @@
         },
         computed : {
             filteredUsers : function () {
-                return this.topUsers.filter((user) => user.mode === this.appMode);
+                return this.topUsers.filter(user => user.mode === this.appMode);
             }
         },
         methods : {
@@ -55,9 +55,10 @@
                 this.$eventHub.$emit('game-mode-changed', number);
             },
             loadTop : function () {
-                fetch('/api/users')
+                fetch('/api/gamers')
                         .then((response) => response.json())
                         .then((users) => this.topUsers = users);
+
             }
         }
     }
@@ -100,6 +101,11 @@
 
     .users-list table {
         margin: auto;
+    }
+
+    .users-list {
+        max-height: 350px;
+        overflow: auto;
     }
 
     .btn-back {

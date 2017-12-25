@@ -253,12 +253,11 @@
                 fd.append('score', this.user.score);
                 fd.append('mode', this.appMode);
                 var params = {
-                    method : 'PUT',
-                    mode : 'cors',
+                    method : 'POST',
                     body : fd
                 };
 
-                fetch('/api/user', params).then(console.log, console.log);
+                fetch('/api/gamer', params).then(console.log, console.log);
 
                 if (userName !== '') {
                     swal("Score saved!", "Thank you for playing, " + userName + "!", "success");
