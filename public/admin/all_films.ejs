@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All films</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.css">
+    <link rel="stylesheet prefetch" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+
+<table class="table table-striped films-list">
+    <thead>
+    <tr>
+        <th scope="col">№</th>
+        <th scope="col">Title</th>
+        <th scope="col">Picture</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i = 0; i < films.length; i++) { %>
+    <tr data-id="<%= films[i].id %>">
+        <td><b><%= i+1 %></b></td>
+        <td class="film-title"><%= films[i].title %></td>
+        <td class="film-img"><img src="<%= films[i].img %>"/></td>
+        <td>
+            <button type="button" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span> Trash
+            </button><br/><br/>
+            <button type="button" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-refresh"></span> Update
+            </button>
+        </td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
