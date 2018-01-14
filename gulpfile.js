@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var nodemon = require('nodemon');
 
 gulp.task('build', function(){
-    gulp.src('./app/*.js').pipe(gulp.dest('/'));
+    gulp.src('./app/*.js').pipe(gulp.dest('./app/'));
 });
 
 gulp.task('watch', ['build'], function() {
