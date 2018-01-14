@@ -103,11 +103,6 @@
         margin: auto;
     }
 
-    .users-list {
-        max-height: 350px;
-        overflow: auto;
-    }
-
     .btn-back {
         position: absolute;
         left: 1em;

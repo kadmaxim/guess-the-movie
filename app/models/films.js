@@ -22,6 +22,11 @@ module.exports = {
         let filmID = req.params.id;
         DB.query('SELECT * FROM movies WHERE id = ?', filmID).spread(rows => rows[0]).then(film => res.json(film), next);
     },
+    loadAll : function () {
+        return new Promise((resolve, reject) => {
+            DB.query('SELECT * FROM movies').spread(films => films).then(resolve, reject);
+        });
+    },
     getAll : function (req, res) {
         DB.query('SELECT * FROM movies').spread(films => res.json(films));
     }

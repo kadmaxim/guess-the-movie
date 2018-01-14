@@ -44,3 +44,23 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.films-list {
+  margin: 1em auto;
+  width: 700px;
+  border: 1px solid #dedede;
+  box-shadow: 0 0 2px #dedede;
+  background: white;
+}
+
+.films-list th {
+  text-align: center;
+}
+
+.table.films-list td {
+  vertical-align: middle;
+}
+
+.films-list img {
+  max-width: 200px;
+}

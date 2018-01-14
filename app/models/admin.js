@@ -1,3 +1,5 @@
+const Films = require('./films');
+
 module.exports = {
     home : function (req, res) {
         res.render('home', { user : req.user });
@@ -17,6 +19,11 @@ module.exports = {
         res.render('profile', { user : req.user });
     },
     addfilms : function (req, res) {
-	res.render('admin');
+        res.render('add_films');
+    },
+    films : function (req, res) {
+        Films.loadAll().then(function(data){
+            res.render('all_films', { films : data });
+        });
     }
 };

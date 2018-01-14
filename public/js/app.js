@@ -65,7 +65,7 @@ new Vue({
         },
         showTop: function () {
             var el = document.getElementById("main-wrap");
-            el.className = "film-app";
+            el.className = "film-app top-view";
             this.currentView = 'top';
         },
         showMenu : function (show) {

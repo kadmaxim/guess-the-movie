@@ -191,7 +191,7 @@
 
                 if (diff.length > 0) {
                     this.buttons = _.shuffle(sampled);
-                    this.$forceUpdate();
+                    this.clearBtn();
                     this.question = _.sample(diff);
                     if (this.appMode == 1) {
                         var elemBar = document.querySelector('.controls-wrapp i.front-lasts');
@@ -199,7 +199,7 @@
                         this.appTimer.resetInterval();
                     }
                 } else {
-                    var check = _.difference(this.films, this.user.answers);
+                    var check = _.difference(this.movies, this.user.answers);
                     if (check.length > 0) {
                         this.loadNext();
                     } else {
