@@ -1,6 +1,6 @@
 # Guess the movie
 
-Test your visual memory with a exciting game "Guess the movie".
+Test your visual memory with an exciting game "Guess the movie".
 
 Guess as many movies as possible, using only stills from them. <br/>
 The game involves thousands of movies and tens of thousands of stills.<br/>
